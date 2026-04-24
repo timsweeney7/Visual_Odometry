@@ -9,3 +9,9 @@ pyvenv.cfg
 
 # Config files for VSCode
 .vscode/*
+
+# Cache files
+__pycache__/*
+
+# Old data
+droneDataSet/*

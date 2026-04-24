@@ -17,10 +17,11 @@ sequences: grayscale dataset 22GB
 REPO DESCRIPTION:
 
 This repository is set up to run eight different algorithms for visual odometry using the kitti benchmarking data set.
-The odometry.py script is the main script to be run when wanting to use the algorithms and visualize their performance.
-Under the utilities folder, there are several helper scripts, mainly featuring being StereoMatcherTester.py which provides
-a GUI for optimizing stereomatcher paramters, and readResults.py which takes is used in the odometry.py script to
-visualize/save plots. This can also be run indepently after data has been saved from running odometry.py, by writing the
+The odometry.py script is the main script to be run when wanting to run the different algorithms and visualize their performance.
+
+Under the utilities folder, there are several helper scripts. The main features under utilities is StereoMatcherTester.py which provides
+a GUI for optimizing stereomatcher paramters, and readResults.py which is used in the odometry.py script to
+visualize/save plots. This can be run indepently after data has been saved from running odometry.py by writing the
 path to the data you want to analyze. More comments within the scripts detail the function parameters and return elements,
 and instructions, as well as an explanation of how the code functions, is found below.
 
