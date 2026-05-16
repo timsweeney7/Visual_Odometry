@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 
-path = "./kittiDataSet/sequences/00"
+path = "/Volumes/SSK Media/visual_odometry/dataset/sequences/00"
 image = "000000.png"
 
 img1 = cv.imread(f'{path}/image_0/{image}', cv.IMREAD_UNCHANGED) #queryimage # left image

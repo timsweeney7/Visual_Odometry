@@ -9,20 +9,20 @@ import time
 import json
 from utilities.readResults import displayResults
 
-def data_set_setup(sequence) -> tuple:
+def data_set_setup(sequence, dir=None) -> tuple:
     """
     return:  (left_images_list, right_images_list, P0, P1, groundTruth, times)
     """
-
-    seq_dir = f'./kittiDataSet/sequences/{sequence}/'
-    poses_dir = f'./kittiDataSet/poses/{sequence}.txt'
+    if dir is None:
+        dir = f'./kittiDataSet/sequences'
+    
+    seq_dir = f'{dir}/sequences/{sequence}/'
+    poses_dir = f'{dir}/poses/{sequence}.txt'
     poses = pd.read_csv(poses_dir, delimiter=' ', header=None)
 
     # Get names of files to iterate through
-    left_image_files = os.listdir(seq_dir + 'image_0')
-    left_image_files.sort()
-    right_image_files = os.listdir(seq_dir + 'image_1')
-    right_image_files.sort()
+    left_image_files = sorted(f for f in os.listdir(seq_dir + 'image_0') if not f.startswith('._'))
+    right_image_files = sorted(f for f in os.listdir(seq_dir + 'image_1') if not f.startswith('._'))
 
      # Get calibration details for scene
     calib = pd.read_csv(seq_dir + 'calib.txt', delimiter=' ', header=None, index_col=0)
@@ -96,7 +96,7 @@ def algorithm_1(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -257,7 +257,7 @@ def algorithm_2(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -418,7 +418,7 @@ def algorithm_3(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -582,7 +582,7 @@ def algorithm_4(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -748,7 +748,7 @@ def algorithm_5(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -909,7 +909,7 @@ def algorithm_6(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -1075,7 +1075,7 @@ def algorithm_7(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -1235,7 +1235,7 @@ def algorithm_8(start_pose:int = None, end_pose:int = None, live_plot = 1, gtInt
         # Start timer for frame
         start = time.time()
         # Get our stereo images for depth estimation
-        seq_dir = f'./kittiDataSet/sequences/{sequence}/'
+        seq_dir = f'{dir}/sequences/{sequence}/'
         image_left = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_right = cv2.imread(seq_dir + 'image_1/' + right_image_files[start_pose + i], cv2.IMREAD_UNCHANGED)
         image_plus1 = cv2.imread(seq_dir + 'image_0/' + left_image_files[start_pose+ i +1], cv2.IMREAD_UNCHANGED)  
@@ -1463,9 +1463,12 @@ if __name__ == "__main__":
     start_time = datetime.now()
     frame_rate = 10 #Hz
     sequence = "00"
-    left_image_files, right_image_files, P0, P1, gt, times = data_set_setup(sequence)
+    # set the directory for where the sequence data is stored.
+    dir = f"/Volumes/SSK Media/visual_odometry/dataset" 
+    
+    left_image_files, right_image_files, P0, P1, gt, times = data_set_setup(sequence, dir)
     # Setup plot that will be used on each iteration of code
-    fig = plt.figure(figsize=(14, 14))
+    fig = plt.figure(figsize=(7, 7))
     plt.title("Trajectory")
     ax = fig.add_subplot(projection='3d')
     ax.view_init(elev=-20, azim=270)
@@ -1486,14 +1489,14 @@ if __name__ == "__main__":
     description_8 = "Algorithm 8: BM + ORD + FLANN + Filter: Lowe Ratio Test"
     
 
-    p1 =  "./kittiDataSet/results/algorithm_1/algorithm_1.json" 
-    p2 = "./kittiDataSet/results/algorithm_2/algorithm_2.json"
-    p3 = "./kittiDataSet/results/algorithm_3/algorithm_3.json"
-    p4 = "./kittiDataSet/results/algorithm_4/algorithm_4.json"
-    p5 = "./kittiDataSet/results/algorithm_5/algorithm_5.json"
-    p6 = "./kittiDataSet/results/algorithm_6/algorithm_6.json"
-    p7 = "./kittiDataSet/results/algorithm_7/algorithm_7.json"
-    p8 = "./kittiDataSet/results/algorithm_8/algorithm_8.json"
+    p1 = f"{dir}/results/algorithm_1/algorithm_1.json" 
+    p2 = f"{dir}/results/algorithm_2/algorithm_2.json"
+    p3 = f"{dir}/results/algorithm_3/algorithm_3.json"
+    p4 = f"{dir}/results/algorithm_4/algorithm_4.json"
+    p5 = f"{dir}/results/algorithm_5/algorithm_5.json"
+    p6 = f"{dir}/results/algorithm_6/algorithm_6.json"
+    p7 = f"{dir}/results/algorithm_7/algorithm_7.json"
+    p8 = f"{dir}/results/algorithm_8/algorithm_8.json"
 
     #user interface initialization and processes
     print("Menu: ")
@@ -1521,40 +1524,41 @@ if __name__ == "__main__":
         case 1:
             alg = algorithm_1
             alg_des = description_1
-            path = "./kittiDataSet/results/algorithm_1/algorithm_1.json" 
+            path = f"{dir}/results/algorithm_1/algorithm_1.json"
         case 2:
             alg = algorithm_2
             alg_des = description_2
-            path = "./kittiDataSet/results/algorithm_2/algorithm_2.json"
+            path = f"{dir}/results/algorithm_2/algorithm_2.json"
         case 3:
             alg = algorithm_3
             alg_des = description_3
-            path = "./kittiDataSet/results/algorithm_3/algorithm_3.json"
+            path = f"{dir}/results/algorithm_3/algorithm_3.json"
         case 4:
             alg = algorithm_4
             alg_des = description_4
-            path = "./kittiDataSet/results/algorithm_4/algorithm_4.json"
+            path = f"{dir}/results/algorithm_4/algorithm_4.json"
         case 5:
             alg = algorithm_5
             alg_des = description_5
-            path = "./kittiDataSet/results/algorithm_5/algorithm_5.json"
+            path = f"{dir}/results/algorithm_5/algorithm_5.json"
         case 6:
             alg = algorithm_6
             alg_des = description_6
-            path = "./kittiDataSet/results/algorithm_6/algorithm_6.json"
+            path = f"{dir}/results/algorithm_6/algorithm_6.json"
         case 7:
             alg = algorithm_7
             alg_des = description_7
-            path = "./kittiDataSet/results/algorithm_7/algorithm_7.json"
+            path = f"{dir}/results/algorithm_7/algorithm_7.json"
         case 8:
             alg = algorithm_8
             alg_des = description_8
-            path = "./kittiDataSet/results/algorithm_8/algorithm_8.json"
+            path = f"{dir}/results/algorithm_8/algorithm_8.json"
         case default:
             alg = algorithm_1
             alg_des = description_1
-            path = "./kittiDataSet/results/algorithm_1/algorithm_1.json"
+            path = f"{dir}/results/algorithm_1/algorithm_1.json"
     
+    print()
     print("CHOSEN:")
     print(alg_des)
     #if chose to not run all, allow for overriding path location
@@ -1592,6 +1596,8 @@ if __name__ == "__main__":
     #enter frequency to inject ground truth
     gtInt = input("Enter frequency (in seconds) to inject ground truth data (Enter value < 0.1 if never): ")
     gtInt = int(round(frame_rate*float(gtInt)))
+    
+    dummy = input('dummy')
     
     
     algs = [algorithm_1, algorithm_2, algorithm_3, algorithm_4, algorithm_5, algorithm_6, algorithm_7, algorithm_8]

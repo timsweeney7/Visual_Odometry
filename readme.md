@@ -1,20 +1,12 @@
-ENPM673 Final Project - Visual Odometry
-
-Project was built with the following versions:
-Python          3.10.12
-opencv-python:  4.8.0.76       
-numpy:          1.25.2
-matplotlib:     3.7.1
-
-
+# ENPM673 Final Project - Visual Odometry
 
 Download datasets from: https://www.cvlibs.net/datasets/kitti/eval_odometry.php
+You need to download:  
+ground truth poses dataset - 4MB  
+grayscale dataset - 22GB
 
-poses: ground truth dataset 4MB
-sequences: grayscale dataset 22GB
 
-================================================
-REPO DESCRIPTION:
+## REPO DESCRIPTION
 
 This repository is set up to run eight different algorithms for visual odometry using the kitti benchmarking data set.
 The odometry.py script is the main script to be run when wanting to run the different algorithms and visualize their performance.
@@ -25,8 +17,27 @@ visualize/save plots. This can be run indepently after data has been saved from 
 path to the data you want to analyze. More comments within the scripts detail the function parameters and return elements,
 and instructions, as well as an explanation of how the code functions, is found below.
 
-================================================
-REPO PREREQUISITES
+
+
+## Example Outputs
+<img src="img/000000.png" alt="alt text" >
+Example image from the dataset
+<br>
+<br>  
+
+<img src="img/stereo_tester.png" alt="stereo tester">
+Running StereoMatcherTester.py to visualize the depth map created with the current Block Matching Algorithm settings.
+<br>
+<br> 
+
+<img src="img/odometry.gif" alt="odometry results">
+Red - Calculated car position
+Blue - Ground truth car route
+<br>
+<br> 
+
+
+## PREREQUISITES
 
 1) Must have same file structure/hierarchy/naming EXACTLY as repo submitted, otherwise plotting/saving data will not work:
 
@@ -43,12 +54,14 @@ working directory
 - odometry.py
 
 
-
 2) poses and sequences are downloaded from the kitti suite
     NOTE: you can use winrar to extract these to the right relative locations, otherwise you must manually add poses inside the dataset folder
 
+
 ================================================
-REPO INSTRUCTIONS
+
+
+# REPO INSTRUCTIONS
 
 odometry.py:
 
@@ -119,7 +132,9 @@ must be pressed for the plot to close and the script to end.
 
 
 ================================================
-CODE FUNCTIONALITY NOTES
+
+
+# CODE FUNCTIONALITY NOTES
 
 - ALGORITHMS:
 

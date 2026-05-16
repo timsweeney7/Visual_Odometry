@@ -12,6 +12,7 @@ pyvenv.cfg
 
 # Cache files
 __pycache__/*
+utilities/__pycache__/*
 
 # Old data
 droneDataSet/*
